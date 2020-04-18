@@ -33,10 +33,10 @@ const ProductGrid = ({
           display: flex;
           flex-wrap: wrap;
 
-          ${getBreakpoints(columnBreakpoints)}
+          ${ProductGrid.getBreakpoints(columnBreakpoints)}
 
           & > * {
-            padding: 6px;
+            padding: ${ProductGrid.gridSpacing}px;
           }
         `}
       >
@@ -52,10 +52,12 @@ const ProductGrid = ({
 
 export default ProductGrid
 
+ProductGrid.gridSpacing = 6
+
 /**
  * Turns a map of column breakpoints into the approriate css
  */
-function getBreakpoints(breakpoints: Breakpoints) {
+ProductGrid.getBreakpoints = (breakpoints: Breakpoints) => {
   const orderedBreakpoints = Object.entries(breakpoints).sort(([a], [b]) =>
     parseInt(a) < parseInt(b) ? -1 : 1,
   )
@@ -67,7 +69,6 @@ function getBreakpoints(breakpoints: Breakpoints) {
           & > * {
             width: ${100 / parseInt(columns)}%;
             max-width: ${100 / parseInt(columns)}%;
-            /* flex-basis: ${100 / parseInt(columns)}%; */
           }
         }
       `,

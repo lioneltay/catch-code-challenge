@@ -7,3 +7,5 @@ export {
   default as CircularProgress,
   CircularProgressProps,
 } from "@material-ui/core/CircularProgress"
+
+export { Select, MenuItem, InputLabel, FormControl } from "@material-ui/core"

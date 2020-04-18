@@ -4,7 +4,3 @@ export {
   default as PaginationNavigation,
   PaginationNavigationProps,
 } from "./PaginationNavigation"
-export {
-  default as PaginatedProductDisplay,
-  PaginatedProductDisplayProps,
-} from "./PaginatedProductDisplay"

@@ -1,6 +1,6 @@
 import React from "react"
 import { theme } from "theme"
-import { noopTemplate as css, isNil } from "lib/utils"
+import { noopTemplate as css, isNil, displayPrice } from "lib/utils"
 
 import { Text, AspectRatioBox } from "lib/components"
 import Dotdotdot from "react-dotdotdot"
@@ -36,6 +36,7 @@ const ProductCard = ({
       <AspectRatioBox className="fa-c fj-c" aspectRatio={195.52 / 238}>
         <img
           src={imageUrl}
+          alt={name}
           css={css`
             width: 100%;
             max-height: 100%;
@@ -87,7 +88,7 @@ const ProductCard = ({
             height: 24px;
           `}
         >
-          {hasSalePrice ? displayPrice(retailPrice) : ""}
+          {hasSalePrice && retailPrice !== 0 ? displayPrice(retailPrice) : ""}
         </Text>
 
         <Text variant="h5" component="p" align="center" className="mt-3" bold>
@@ -101,7 +102,3 @@ const ProductCard = ({
 }
 
 export default ProductCard
-
-function displayPrice(cents: number) {
-  return `$${(cents / 100).toFixed(2)}`
-}

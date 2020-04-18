@@ -8,7 +8,10 @@ export type TextProps = TypographyProps & {
   lineThrough?: boolean
 }
 
-export default ({ color, bold, lineThrough, ...props }: TextProps) => {
+/**
+ * Text component that encapsulates all common text styling for the application
+ */
+const Text = ({ color, bold, lineThrough, ...props }: TextProps) => {
   return (
     <Typography
       {...props}
@@ -20,3 +23,5 @@ export default ({ color, bold, lineThrough, ...props }: TextProps) => {
     />
   )
 }
+
+export default Text

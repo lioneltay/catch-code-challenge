@@ -14,60 +14,50 @@ const PaginationNavigation = ({
   pages,
   onPageChange,
 }: PaginationNavigationProps) => {
-  function renderButton(pageNumber: number) {
+  const divider = <span>...</span>
+
+  function renderButton(props: { pageNumber: number; label?: string }) {
+    const { pageNumber, label } = props
+    const clampedPageNumber = Math.min(pages, Math.max(1, pageNumber))
+
     return (
       <Button
-        selected={pageNumber === currentPage}
+        // only number buttons can be selected
+        selected={!label && clampedPageNumber === currentPage}
         onClick={() => {
-          if (currentPage !== pageNumber) {
-            onPageChange(pageNumber)
+          if (currentPage !== clampedPageNumber) {
+            onPageChange(clampedPageNumber)
           }
         }}
       >
-        {pageNumber}
+        {label || clampedPageNumber}
       </Button>
     )
   }
 
   function renderMiddleButton(pageNumber: number) {
     return pageNumber > 1 && pageNumber < pages
-      ? renderButton(pageNumber)
+      ? renderButton({ pageNumber })
       : null
   }
 
   return (
     <div className="fa-c">
-      <Button
-        onClick={() => {
-          if (currentPage > 1) {
-            onPageChange(currentPage - 1)
-          }
-        }}
-      >
-        Back
-      </Button>
+      {renderButton({ pageNumber: currentPage - 1, label: "« Back" })}
 
-      {renderButton(1)}
+      {renderButton({ pageNumber: 1 })}
 
-      {currentPage >= 4 ? "..." : null}
+      {currentPage >= 4 ? divider : null}
 
       {renderMiddleButton(currentPage - 1)}
       {renderMiddleButton(currentPage)}
       {renderMiddleButton(currentPage + 1)}
 
-      {currentPage <= pages - 3 ? "..." : null}
+      {currentPage <= pages - 3 ? divider : null}
 
-      {renderButton(pages)}
+      {renderButton({ pageNumber: pages })}
 
-      <Button
-        onClick={() => {
-          if (currentPage < pages) {
-            onPageChange(currentPage + 1)
-          }
-        }}
-      >
-        More
-      </Button>
+      {renderButton({ pageNumber: currentPage + 1, label: "More »" })}
     </div>
   )
 }
