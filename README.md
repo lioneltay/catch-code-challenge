@@ -1,0 +1,3 @@
+- Truncate text should supportie
+- grid layout should support ie
+- make sure image ratio is fixed. Looks like api gives nice sizes but you can't rely on this.

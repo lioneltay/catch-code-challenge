@@ -1,0 +1,33 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": 2019,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "eslint-config-prettier/@typescript-eslint",
+    "eslint-config-prettier",
+    "plugin:react/recommended"
+  ],
+  "plugins": ["@typescript-eslint/eslint-plugin", "react", "react-hooks"],
+  "rules": {
+    "strict": ["error", "never"],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "react/display-name": "off",
+    "react/prop-types": "off",
+    "react-hooks/rules-of-hooks": "error"
+    // "react-hooks/exhaustive-deps": "warn"
+  },
+  "env": {
+    "browser": true
+  }
+}
