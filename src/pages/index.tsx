@@ -56,13 +56,13 @@ export default () => {
         </div>
 
         <div
-          className="mt-4 fj-sb fa-c"
+          className="fj-sb fa-c f-wrap"
           css={css`
             padding-left: ${ProductGrid.gridSpacing}px;
             padding-right: ${ProductGrid.gridSpacing}px;
           `}
         >
-          <div>
+          <div className="mt-4" style={{ minWidth: 300 }}>
             <Text variant="h5">Showing results for {`"${query}"`}</Text>
             {currentPage && totalPages ? (
               <Text color="textSecondary" variant="body2">
@@ -71,7 +71,7 @@ export default () => {
             ) : null}
           </div>
 
-          <FormControl variant="outlined">
+          <FormControl className="mt-4" variant="outlined">
             <InputLabel id="product-sort">Sort by</InputLabel>
             <Select
               css={css`

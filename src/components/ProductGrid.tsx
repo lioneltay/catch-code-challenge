@@ -79,7 +79,7 @@ type Breakpoints = Record<number, number>
 
 const defaultColumnBreakpoints: Breakpoints = {
   1: 0,
-  2: 450,
+  2: 600,
   3: 800,
   4: 950,
 }
