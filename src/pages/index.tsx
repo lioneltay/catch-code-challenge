@@ -44,7 +44,7 @@ export default () => {
         width: 100%;
       `}
     >
-      <div style={{ width: "100%" }}>
+      <div style={{ maxWidth: 1200, width: "100%" }}>
         <div className="fa-c fj-sb">
           <img
             src="/assets/catch-logo.svg"
@@ -104,7 +104,10 @@ export default () => {
               <PaginationNavigation
                 pages={totalPages}
                 currentPage={currentPage}
-                onPageChange={(page) => setCurrentPage(page)}
+                onPageChange={(page) => {
+                  setCurrentPage(page)
+                  window.scrollTo({ top: 0, behavior: "smooth" })
+                }}
               />
             </div>
           ) : null}

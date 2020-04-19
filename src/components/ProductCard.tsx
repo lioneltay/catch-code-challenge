@@ -2,7 +2,7 @@ import React from "react"
 import { theme } from "theme"
 import { noopTemplate as css, isNil, displayPrice } from "lib/utils"
 
-import { Text, AspectRatioBox } from "lib/components"
+import { Text, AspectRatioBox, LazyLoad } from "lib/components"
 import Dotdotdot from "react-dotdotdot"
 
 export type ProductCardProps = Stylable & {
@@ -34,15 +34,17 @@ const ProductCard = ({
       {...rest}
     >
       <AspectRatioBox className="fa-c fj-c" aspectRatio={195.52 / 238}>
-        <img
-          src={imageUrl}
-          alt={name}
-          css={css`
-            width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-          `}
-        />
+        <LazyLoad once>
+          <img
+            src={imageUrl}
+            alt={name}
+            css={css`
+              width: 100%;
+              max-height: 100%;
+              object-fit: contain;
+            `}
+          />
+        </LazyLoad>
 
         {quantityAvailable === 0 ? (
           <div

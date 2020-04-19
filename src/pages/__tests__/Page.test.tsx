@@ -5,6 +5,8 @@ import Page from "../index"
 import { getProducts } from "services/api"
 const getProductsMock: jest.Mock<any, any> = getProducts as any
 
+window.scrollTo = jest.fn()
+
 jest.mock("services/api", () => {
   const { generateProducts } = require("testing")
 

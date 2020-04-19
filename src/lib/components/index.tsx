@@ -9,3 +9,4 @@ export {
 } from "@material-ui/core/CircularProgress"
 
 export { Select, MenuItem, InputLabel, FormControl } from "@material-ui/core"
+export { default as LazyLoad } from "./LazyLoad"

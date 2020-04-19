@@ -23,7 +23,6 @@ const ProductGrid = ({
   return (
     <div
       css={css`
-        max-width: 1200px;
         width: 100%;
       `}
       {...rest}
