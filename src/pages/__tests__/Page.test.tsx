@@ -1,5 +1,5 @@
 import React from "react"
-import { asyncRender, waitFor } from "testing"
+import { asyncRender, waitFor, getByText } from "testing"
 import user from "@testing-library/user-event"
 import Page from "../index"
 import { getProducts } from "services/api"
@@ -74,3 +74,20 @@ it("page updates its products as the page/sortBy values change", async () => {
   })
   getProductsMock.mockClear()
 })
+
+it("Opens and closes the modal", async () => {
+  const r = await asyncRender(<Page />)
+
+  const modalButton = r.getByText(/view my cart/i)
+  modalButton.click()
+
+  // Modal is open
+  const modal = r.getByTestId("modal")
+
+  const closeButton = getByText(modal, /close/i)
+  closeButton.click()
+
+  expect(r.queryByTestId("modal")).toBeNull()
+})
+
+it.only("Add to cart button adds and item to the cart", async () => {})

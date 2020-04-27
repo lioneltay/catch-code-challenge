@@ -4,6 +4,9 @@ import { noopTemplate as css } from "lib/utils"
 import { getProducts, Product, ProductSortOption } from "services/api"
 import { InputLabel, Select, MenuItem, FormControl, Text } from "lib/components"
 import { ProductGrid, PaginationNavigation } from "components"
+import { Button, Modal, Paper } from "@material-ui/core"
+import { useSelector } from "react-redux"
+import { State } from "services/store"
 
 const query = "best sellers"
 
@@ -16,6 +19,8 @@ export default () => {
     "price-high-to-low",
   )
   const [loading, setLoading] = React.useState(false)
+  const [showCart, setShowCart] = React.useState(false)
+  const cart = useSelector<State>((state) => state.cart)
 
   React.useEffect(() => {
     async function effect() {
@@ -53,6 +58,24 @@ export default () => {
               width: 200px;
             `}
           />
+
+          <Button onClick={() => setShowCart(true)}>View My Cart</Button>
+
+          <Modal
+            data-testid="modal"
+            open={showCart}
+            onClose={() => setShowCart(false)}
+          >
+            <div className="fa-c fj-c" style={{ minHeight: "100vh" }}>
+              <Paper className="p-4">
+                {cart.map((item) => (
+                  <ProductItem key={item.id} product={item} />
+                ))}
+
+                <Button onClick={() => setShowCart(false)}>Close</Button>
+              </Paper>
+            </div>
+          </Modal>
         </div>
 
         <div
@@ -132,3 +155,24 @@ const Overlay = styled.div<{ show: boolean }>`
   height: 100%;
   width: 100%;
 `
+
+type ProductItemProps = {
+  product: Product
+}
+
+const ProductItem = ({ product }: ProductItemProps) => {
+  return (
+    <div>
+      <Text>{product.name}</Text>
+      <img
+        src={product.imageUrl}
+        alt={product.name}
+        css={css`
+          width: 100%;
+          max-height: 100%;
+          object-fit: contain;
+        `}
+      />
+    </div>
+  )
+}

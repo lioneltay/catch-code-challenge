@@ -5,6 +5,8 @@ import { Product } from "services/api"
 
 import { StylesProvider } from "@material-ui/core"
 import GlobalStyles from "styles/global"
+import { Provider } from "react-redux"
+import { store } from "services/store"
 
 export * from "@testing-library/react"
 
@@ -17,7 +19,7 @@ export const asyncRender = async (
 ): Promise<RenderResult> => {
   let result
   await act(async () => {
-    result = rtlRender(ui, options)
+    result = renderWithWrappers(ui, options)
   })
   return (result as unknown) as RenderResult
 }
@@ -28,10 +30,12 @@ export const renderWithWrappers = (
 ) => {
   const Wrapper: React.FC = ({ children }) => {
     return (
-      <StylesProvider injectFirst>
-        <GlobalStyles />
-        {children}
-      </StylesProvider>
+      <Provider store={store}>
+        <StylesProvider injectFirst>
+          <GlobalStyles />
+          {children}
+        </StylesProvider>
+      </Provider>
     )
   }
 

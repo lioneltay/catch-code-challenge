@@ -4,6 +4,10 @@ import { noopTemplate as css, isNil, displayPrice } from "lib/utils"
 
 import { Text, AspectRatioBox, LazyLoad } from "lib/components"
 import Dotdotdot from "react-dotdotdot"
+import { Button } from "@material-ui/core"
+
+import { addToCart } from "services/store"
+import { useDispatch } from "react-redux"
 
 export type ProductCardProps = Stylable & {
   id: string
@@ -24,6 +28,7 @@ const ProductCard = ({
   ...rest
 }: ProductCardProps) => {
   const hasSalePrice = !isNil(salePrice)
+  const dispatch = useDispatch()
 
   return (
     <div
@@ -98,6 +103,29 @@ const ProductCard = ({
             ? displayPrice(salePrice)
             : displayPrice(retailPrice)}
         </Text>
+
+        <div className="fj-c mt-2">
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => {
+              dispatch(
+                addToCart({
+                  product: {
+                    id,
+                    imageUrl,
+                    name,
+                    retailPrice,
+                    salePrice,
+                    quantityAvailable,
+                  },
+                }),
+              )
+            }}
+          >
+            Add To Cart
+          </Button>
+        </div>
       </div>
     </div>
   )
